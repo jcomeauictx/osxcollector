@@ -5,3 +5,6 @@
 .idea/
 virtualenv_run/
 .coverage
+build/
+dist/
+sdist/
