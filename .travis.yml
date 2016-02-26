@@ -2,8 +2,8 @@
 language: objective-c
 
 os: osx
-
+env:
+    - TOXENV=py27
 install:
     - sudo pip install tox
-
 script: make test
