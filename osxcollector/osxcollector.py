@@ -26,6 +26,7 @@ import os
 import shutil
 import struct
 import sys
+import logging  # script also has its own Logger class
 from argparse import ArgumentParser
 from collections import namedtuple
 from datetime import datetime
@@ -41,10 +42,13 @@ from sqlite3 import connect
 from sqlite3 import OperationalError
 from traceback import extract_tb
 
-import Foundation
-import macholib.MachO
-import objc
-from xattr import getxattr
+try:
+    import Foundation
+    import macholib.MachO
+    import objc
+    from xattr import getxattr
+except ImportError:
+    logging.error('Missing dependencies -- emulating environment while testing')
 
 __version__ = '1.9'
 
