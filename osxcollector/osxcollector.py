@@ -47,8 +47,10 @@ try:
     import macholib.MachO
     import objc
     from xattr import getxattr
+    TEST_EMULATION = False
 except ImportError:
     logging.error('Missing dependencies -- emulating environment while testing')
+    TEST_EMULATION = True
 
 __version__ = '1.9'
 
@@ -1875,7 +1877,10 @@ def main():
 
     if ROOT_PATH == '/' and (euid != 0 and egid != 0):
         Logger.log_error('Must run as root!\n')
-        return
+        if not TEST_EMULATION:
+            return
+        else:
+            logging.warn('Continuing as non-root user for testing')
 
     # Ignore cookies value
     if not args.collect_cookies_value:
